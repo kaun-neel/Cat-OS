@@ -21,16 +21,6 @@
   scanner. Live nearby vet &amp; shelter search. No mock data — everything you see is user-entered.
 </p>
 
-<p align="center">
-  <a href="#-features">Features</a> •
-  <a href="#-tech-stack">Tech Stack</a> •
-  <a href="#-getting-started">Getting Started</a> •
-  <a href="#-configuration">Configuration</a> •
-  <a href="#-deployment">Deployment</a> •
-  <a href="#-api-reference">API</a> •
-  <a href="#-security">Security</a>
-</p>
-
 ---
 
 ## Overview
