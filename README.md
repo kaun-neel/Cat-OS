@@ -108,7 +108,7 @@ Node.js · Express 5 · JWT auth (bcrypt + jsonwebtoken) · Multer (file uploads
 - **AI and maps are optional add-ons.** Both are called from the backend so API keys never
   reach the browser, and both have offline fallbacks.
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 ├── src/                  React frontend
@@ -131,7 +131,7 @@ Node.js · Express 5 · JWT auth (bcrypt + jsonwebtoken) · Multer (file uploads
 
 ---
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 
