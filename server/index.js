@@ -1,5 +1,6 @@
 import "dotenv/config";
 import express from "express";
+import helmet from "helmet";
 import cors from "cors";
 import path from "path";
 import fs from "fs";
@@ -22,6 +23,36 @@ if (!fs.existsSync(UPLOADS_DIR)) fs.mkdirSync(UPLOADS_DIR, { recursive: true });
 const app = express();
 const PORT = process.env.PORT || 4000;
 
+// Security headers (Helmet). Sets CSP, HSTS, X-Content-Type-Options,
+// X-Frame-Options, etc. CSP is scoped to this app's actual external
+// resources: Google Fonts (index.html) and OpenStreetMap tiles (Vets &
+// Shelters map). crossOriginEmbedderPolicy is disabled because those two
+// third-party origins aren't guaranteed to send CORP/CORS headers CORP
+// would require, and enabling it would risk silently breaking fonts/tiles.
+app.use(
+  helmet({
+    contentSecurityPolicy: {
+      directives: {
+        defaultSrc: ["'self'"],
+        scriptSrc: ["'self'"],
+        // 'unsafe-inline' is required here because React and Framer Motion
+        // set inline style="" attributes directly on DOM nodes throughout
+        // the app (animations, dynamic widths/rotations, chart tooltips).
+        // script-src above stays strict — that's what matters most for XSS.
+        styleSrc: ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com"],
+        fontSrc: ["'self'", "https://fonts.gstatic.com"],
+        // data: for onboarding's FileReader photo preview, blob: for
+        // Scan's URL.createObjectURL() photo preview, OSM for the map tiles.
+        imgSrc: ["'self'", "data:", "blob:", "https://*.tile.openstreetmap.org"],
+        connectSrc: ["'self'"],
+        objectSrc: ["'none'"],
+        baseUri: ["'self'"],
+        frameAncestors: ["'none'"],
+      },
+    },
+    crossOriginEmbedderPolicy: false,
+  })
+);
 app.use(cors());
 app.use(express.json({ limit: "15mb" }));
 app.use("/uploads", express.static(UPLOADS_DIR));
