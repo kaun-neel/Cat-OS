@@ -1,0 +1,146 @@
+@import "tailwindcss";
+
+@theme {
+  --color-paper: #ede6d8;
+  --color-paper-raised: #f6f1e7;
+  --color-ink: #2b2118;
+  --color-ink-soft: #5b4a3a;
+  --color-leather: #6b4a32;
+  --color-clay: #a9713f;
+  --color-rule: #c9b8a0;
+  --color-stamp-red: #9a3b2e;
+  --color-positive: #4f6b4a;
+
+  --font-display: "Fraunces", "Georgia", serif;
+  --font-body: "Public Sans", "Inter", sans-serif;
+  --font-mono: "IBM Plex Mono", "Courier New", monospace;
+}
+
+* {
+  border-color: var(--color-rule);
+}
+
+html {
+  background-color: var(--color-paper);
+}
+
+body {
+  background-color: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+}
+
+::selection {
+  background-color: var(--color-clay);
+  color: var(--color-paper-raised);
+}
+
+/* Subtle paper grain texture, applied globally as a fixed overlay */
+.paper-grain {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.5;
+  background-image:
+    radial-gradient(circle at 20% 20%, rgba(107, 74, 50, 0.035) 0, transparent 40%),
+    radial-gradient(circle at 80% 60%, rgba(107, 74, 50, 0.03) 0, transparent 45%),
+    repeating-linear-gradient(0deg, rgba(43, 33, 24, 0.015) 0px, rgba(43, 33, 24, 0.015) 1px, transparent 1px, transparent 3px);
+}
+
+/* Scattered cat paw print motif, tiled across the page background behind
+   all content. Drawn as an inline SVG data URI (one paw pad + four toes)
+   in the leather brown, repeated and rotated via two offset layers so
+   prints don't line up in an obvious grid. Kept faint so it reads as
+   texture rather than clutter, and sits behind .paper-grain and content. */
+.paw-print-bg {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cg fill='%236B4A32'%3E%3Cellipse cx='60' cy='72' rx='16' ry='13'/%3E%3Cellipse cx='40' cy='52' rx='7' ry='9' transform='rotate(-20 40 52)'/%3E%3Cellipse cx='55' cy='42' rx='7.5' ry='9.5' transform='rotate(-6 55 42)'/%3E%3Cellipse cx='71' cy='42' rx='7.5' ry='9.5' transform='rotate(6 71 42)'/%3E%3Cellipse cx='84' cy='53' rx='7' ry='9' transform='rotate(20 84 53)'/%3E%3C/g%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 220px 220px;
+  background-position: 0 0;
+}
+
+.paw-print-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cg fill='%236B4A32'%3E%3Cellipse cx='60' cy='72' rx='16' ry='13'/%3E%3Cellipse cx='40' cy='52' rx='7' ry='9' transform='rotate(-20 40 52)'/%3E%3Cellipse cx='55' cy='42' rx='7.5' ry='9.5' transform='rotate(-6 55 42)'/%3E%3Cellipse cx='71' cy='42' rx='7.5' ry='9.5' transform='rotate(6 71 42)'/%3E%3Cellipse cx='84' cy='53' rx='7' ry='9' transform='rotate(20 84 53)'/%3E%3C/g%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 300px 300px;
+  background-position: 140px 160px;
+  transform: rotate(12deg) scale(1.1);
+  opacity: 0.7;
+}
+
+/* Dog-eared corner fold — signature detail for primary content cards */
+.dog-ear {
+  position: relative;
+  clip-path: polygon(0 0, calc(100% - 18px) 0, 100% 18px, 100% 100%, 0 100%);
+}
+
+.dog-ear::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 18px 18px 0;
+  border-color: transparent var(--color-paper) transparent transparent;
+  filter: drop-shadow(-1px 1px 1.5px rgba(43, 33, 24, 0.25));
+}
+
+/* Dashed / stitched hairline divider */
+.stitch-line {
+  border-top: 1px dashed var(--color-rule);
+}
+
+.stitch-line-v {
+  border-left: 1px dashed var(--color-rule);
+}
+
+/* Stamped index label */
+.stamp-label {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border: 1px solid currentColor;
+  padding: 0.15rem 0.5rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  border-radius: 2px;
+}
+
+/* Folder tab shape */
+.folder-tab {
+  clip-path: polygon(10px 0, calc(100% - 10px) 0, 100% 100%, 0 100%);
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-paper);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-rule);
+  border-radius: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
