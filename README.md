@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/logo.png" alt="CATOS logo" width="220">
+  <img src="public/images/logo.png" alt="CATOS logo" width="220">
 </p>
 
 <h1 align="center">Cat-OS</h1>
