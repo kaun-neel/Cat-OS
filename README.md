@@ -33,7 +33,7 @@
 
 ---
 
-## 🗂️ Overview
+## Overview
 
 **CATOS** (Cat Health Record Catalog) is a full-stack web application that turns cat
 healthcare tracking into a beautifully styled, index-card-catalog-inspired experience.
@@ -50,26 +50,26 @@ gracefully — the app works fully offline/demo-ready even without either config
 
 ---
 
-## ✨ Features
+## Features
 
 | | |
 |---|---|
-| 🔐 **Accounts** | Email/password signup & login secured with bcrypt + JWT sessions |
-| 🐈 **Multi-cat files** | Unlimited cats per account, each with its own photo, history, and records |
-| 📸 **AI photo scan** | Upload a photo → vision LLM (Ollama/LLaVA) analyzes visible health cues, saved to the cat's timeline |
-| 🗣️ **Behavior translator** | Turn behavior tags/notes into a plain-English read on what your cat might be feeling |
-| 🍽️ **Feeding schedule** | Set feeding times with reminders |
-| 🏥 **Vet visit records** | Log visits with attached documents (Multer file uploads) |
-| 💉 **Vaccination tracking** | Keep a running vaccine history per cat |
-| 🗺️ **Vets & shelters** | Live, location-aware search of nearby vets/shelters on an interactive Leaflet map (Geoapify + OSM data) |
-| 📤 **Data export** | Export all your data as JSON, anytime |
-| 🗑️ **Full control** | Delete any cat file and its records permanently |
-| 📱 **Responsive** | Looks and works great on phone, tablet, and desktop |
-| 🔌 **Graceful degradation** | No Ollama? No Geoapify key? The app still works, with clear on-screen fallbacks |
+| - **Accounts** | Email/password signup & login secured with bcrypt + JWT sessions |
+| - **Multi-cat files** | Unlimited cats per account, each with its own photo, history, and records |
+| - **AI photo scan** | Upload a photo → vision LLM (Ollama/LLaVA) analyzes visible health cues, saved to the cat's timeline |
+| - **Behavior translator** | Turn behavior tags/notes into a plain-English read on what your cat might be feeling |
+| - **Feeding schedule** | Set feeding times with reminders |
+| - **Vet visit records** | Log visits with attached documents (Multer file uploads) |
+| - **Vaccination tracking** | Keep a running vaccine history per cat |
+| - **Vets & shelters** | Live, location-aware search of nearby vets/shelters on an interactive Leaflet map (Geoapify + OSM data) |
+| - **Data export** | Export all your data as JSON, anytime |
+| - **Full control** | Delete any cat file and its records permanently |
+| - **Responsive** | Looks and works great on phone, tablet, and desktop |
+| - **Graceful degradation** | No Ollama? No Geoapify key? The app still works, with clear on-screen fallbacks |
 
 ---
 
-## 🧱 Tech Stack
+## Tech Stack
 
 **Frontend**
 React 19 · TypeScript · Vite 7 · Tailwind CSS 4 · Framer Motion · React Router 7 · Recharts · Leaflet / React-Leaflet · Lucide Icons
@@ -82,22 +82,22 @@ Node.js · Express 5 · JWT auth (bcrypt + jsonwebtoken) · Multer (file uploads
 
 ---
 
-## 🏗️ Architecture
+## Architecture
 
 ```
 ┌────────────────────┐        HTTPS / REST         ┌──────────────────────────┐
-│   React SPA (Vite)  │ ───────────────────────────▶│      Express 5 API       │
-│  Tailwind, Framer,  │◀─────────────────────────── │  JWT auth · Multer       │
-│  Leaflet, Recharts   │        JSON responses       │  server/index.js         │
+│   React SPA (Vite)  │ ───────────────────────────▶│      Express 5 API      │
+│  Tailwind, Framer,  │◀─────────────────────────── │  JWT auth · Multer      │
+│  Leaflet, Recharts   │        JSON responses       │  server/index.js        │
 └────────────────────┘                              └────────┬─────────────────┘
                                                               │
                           ┌───────────────────────────────────┼───────────────────────────┐
                           ▼                                   ▼                           ▼
-                ┌──────────────────┐               ┌──────────────────┐        ┌──────────────────┐
-                │  db.json          │               │  Ollama server    │        │  Geoapify Places  │
-                │  (JSON datastore) │               │  llama3.2 / llava │        │  API (OSM data)    │
-                │  + /uploads       │               │  (local or remote)│        │                    │
-                └──────────────────┘               └──────────────────┘        └──────────────────┘
+                ┌──────────────────┐               ┌──────────────────┐        ┌──────────────────–┐
+                │  db.json          │               │  Ollama server    │      │  Geoapify Places  │
+                │  (JSON datastore) │               │  llama3.2 / llava │      │  API (OSM data)   │
+                │  + /uploads       │               │  (local or remote)│      │                   │
+                └──────────────────┘               └──────────────────┘        └──────────────────-┘
 ```
 
 - The **frontend and backend ship as one app** in production — Express serves the built
@@ -193,7 +193,7 @@ npm run dev:server  # backend only, auto-restarts on changes
 
 ## ⚙️ Configuration
 
-### 🤖 Ollama — behavior translator & photo scan
+### Ollama — behavior translator & photo scan
 
 CATOS calls a local or remote Ollama server for two features: the **Behavior** page's
 plain-English translation, and the **Scan** page's photo health read. Configured in
@@ -240,7 +240,7 @@ Get a free key (3,000 requests/day, no credit card):
 
 ---
 
-## 📦 Scripts
+## Scripts
 
 | Script | Description |
 |---|---|
